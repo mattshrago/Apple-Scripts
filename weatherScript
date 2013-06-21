@@ -1,0 +1,29 @@
+delay 3
+set test to (count (get (("http://www.google.com" as URL)'s host & {dotted decimal form:""})'s dotted decimal form)) > 0
+if test = false then
+  say "[[rate 250]] You do not have any internet connection." using "Zarvox"
+else
+	delay 3
+	say "[[rate 250]] Greetings, Matthew" using "Zarvox"
+	set pre to "AM"
+	set myHour to hours of (current date)
+	set myMinutes to minutes of (current date)
+	if (myHour > 13) then
+		set myHour to (myHour - 12)
+		set pre to "PM"
+	end if
+	say "[[rate 250]] it is, " using "Zarvox"
+	say (myHour as string) using "Zarvox"
+	say (myMinutes as string) using "Zarvox"
+	say pre using "Zarvox"
+	
+	set weather to "curl " & quote & "http://weather.yahooapis.com/forecastrss?p=USMA0113&u=f" & quote
+	
+	set postWeather to "grep -E '(Current Conditions:|F<BR)'"
+	
+	set forecast to do shell script weather & " | " & postWeather
+	
+	set firstString to (characters 1 through -7 of paragraph 2 of forecast) as string
+	
+	say "[[rate 250]],and it is currently " & firstString using "Zarvox"
+end if
