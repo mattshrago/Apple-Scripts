@@ -1,4 +1,4 @@
-appleScripts
+Apple-Scripts
 ============
 
-Startup Weather Script
+This script will be executed everytime my macbook is powered on.
